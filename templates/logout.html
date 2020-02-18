@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
-<body>
-	<h1>Thank you for using the site</h1>
+{% extends '_base.html' %}
 
-	<a href="{% url 'login' %}">Sign in again</a>
-</body>
-</html>
+
+{% block content %}
+
+<h1>Thank you for using the site</h1>
+<a href="{% url 'login' %}">Sign in again</a>
+{% endblock content %}

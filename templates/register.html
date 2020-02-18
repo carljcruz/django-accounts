@@ -1,20 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
-<body>
-	<h1>Register Page</h1>
-	{% if messages %}
-		{% for message in messages %}
-		{{ message  }} <a href="{% url 'login' %}">Login?</a>
-		{% endfor %}
-	{% endif %}
-	<form action="" method='POST'>
-		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" value="submit">
-	</form>
-</body>
-</html>
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Register Page</h1>
+{% if messages %}
+{% for message in messages %}
+<h1>{{ message|safe  }}</h1>
+<br>
+<a href="{% url 'login' %}">Login?</a>
+{% endfor %}
+{% endif %}
+<form action="" method='POST'>
+	{% csrf_token %}
+	{{ form|crispy }}
+	<input type="submit" value="submit">
+</form>
+{% endblock content %}

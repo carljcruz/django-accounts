@@ -1,22 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
-<body>
-	Login Page
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Login Page {% endblock title %}
 
-	<form action="" method='POST'>
-		{% csrf_token %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+{{ message  }} 
+{% endfor %}
+{% endif %}
 
-		{{ form.username.label }}
-		{{ form.username }}
+<form action="" method='POST'>
+	{% csrf_token %}
+	{{ form.username|as_crispy_field }}
 
-		{{ form.password1.label }}
-		{{ form.password1 }}
+	{{ form.password1|as_crispy_field }}
+	<input type="submit" name="submit">
 
-		<input type="submit" name="submit">
-	</form>
-</body>
-</html>
+	{% endblock content %}

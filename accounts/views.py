@@ -1,17 +1,19 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .forms import RegisterUserForm
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 
 
 
-@login_required
 def homepage(request):
     template_name = 'profile.html'
+    if request.user.is_anonymous:
+        messages.info(request, 'You must be logged in to view that page')
+        return redirect('login')
     return render(request, template_name, {})
 
 
@@ -22,7 +24,9 @@ def createUser(request):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Your account has been created successfully')
+            username = form.cleaned_data.get('username')
+            messages.info(request, f"Your account <u>{username}</u> has been"
+                          f" successfully created", extra_tags='safe')
             return redirect('register')
 
     context = {
@@ -31,17 +35,14 @@ def createUser(request):
     return render(request, template_name, context)
 
 def loginUser(request):
-    form = RegisterUserForm(request.POST)
-    print(request.POST)
+    form = RegisterUserForm()
     template_name = 'login.html'
-
+    if request.user.is_authenticated:
+        return redirect('profile')
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
-        print(request.POST)
         username = request.POST.get('username')
-        print(username)
         password = request.POST.get('password1')
-        print(password)
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
