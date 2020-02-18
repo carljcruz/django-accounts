@@ -4,6 +4,12 @@ from .forms import RegisterUserForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+
+
+
+
+@login_required
 def homepage(request):
     template_name = 'profile.html'
     return render(request, template_name, {})
@@ -17,7 +23,7 @@ def createUser(request):
         if form.is_valid():
             form.save()
             messages.info(request, 'Your account has been created successfully')
-            return redirect('login')
+            return redirect('register')
 
     context = {
         'form': form,
@@ -25,7 +31,8 @@ def createUser(request):
     return render(request, template_name, context)
 
 def loginUser(request):
-    form = RegisterUserForm()
+    form = RegisterUserForm(request.POST)
+    print(request.POST)
     template_name = 'login.html'
 
     if request.method == 'POST':
