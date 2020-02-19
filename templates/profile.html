@@ -24,6 +24,11 @@
 <a href="{% url 'update' order.pk %}" class="btn btn-info">Update</a>
 <a href="{% url 'delete' order.pk %}" class="btn btn-danger">Delete</a>
 {% endfor %}
+
+<form action="" method="GET">
+	<input type="text" name='q' placeholder='Search order' value='{{request.GET.q}}'/>
+	<input type="submit" value='Search'>
+</form>
 <br>
 
 <a href="{% url 'logout' %}">Logout</a>

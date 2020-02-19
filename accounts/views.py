@@ -16,6 +16,10 @@ def homepage(request):
         messages.info(request, 'You must be logged in to view that page')
         return redirect('login')
 
+    query = request.GET.get("q")
+    if query:
+        order = order.filter(order_number__icontains=query)
+
     context = {
         'orders': order
     }

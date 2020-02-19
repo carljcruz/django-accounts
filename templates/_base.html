@@ -28,8 +28,7 @@ tr:nth-child(even) {
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-8">
-					<h1 class="mt-2">Bikeshop</h1>
-					<a href="{% url 'order' %}" class="btn btn-success">Create order</a>
+					<a href="{% url 'profile' %}"><h1 class="mt-2">Bikeshop</h1></a>					<a href="{% url 'order' %}" class="btn btn-success">Create order</a>
 					<hr class="mt-0 mb-4">
 					{% block content %}
 					{% endblock %}
