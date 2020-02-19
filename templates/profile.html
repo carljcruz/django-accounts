@@ -11,8 +11,8 @@
 
 	
 	</li></ul>
-	<a href="{% url 'update' order.pk %}">Update</a>
-	<a href="{% url 'delete' order.pk %}">Delete</a>
+	<a href="{% url 'update' order.pk %}" class="btn btn-info">Update</a>
+	<a href="{% url 'delete' order.pk %}" class="btn btn-danger">Delete</a>
 {% endfor %}
 <br>
 
