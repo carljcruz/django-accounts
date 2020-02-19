@@ -3,7 +3,18 @@
 
 {% block content %}
 <h1>Hello, {{ request.user.username }}</h1>
+{% for order in orders %}
 
+<ul><li>
+		
+		{{ order.order_number }}
+
+	
+	</li></ul>
+	<a href="{% url 'update' order.pk %}">Update</a>
+	<a href="{% url 'delete' order.pk %}">Delete</a>
+{% endfor %}
+<br>
 
 <a href="{% url 'logout' %}">Logout</a>
 

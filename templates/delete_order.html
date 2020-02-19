@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block title %}Confirm Delete Order Form{% endblock title %}
+
+
+{% block content %}
+<form action=""method='POST'>
+	{% csrf_token %}
+<h3>Delete Order Form</h3>
+<p>Are you sure you want to delete {{ order.order_number }} ?</p>
+<input type="submit" value="confirm">
+
+	</form>
+{% endblock content %}

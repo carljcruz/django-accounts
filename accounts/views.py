@@ -5,16 +5,21 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
+from orders.models import Order
 
 
 
 def homepage(request):
     template_name = 'profile.html'
+    order = Order.objects.filter(user=request.user)
     if request.user.is_anonymous:
         messages.info(request, 'You must be logged in to view that page')
         return redirect('login')
-    return render(request, template_name, {})
+
+    context = {
+        'orders': order
+    }
+    return render(request, template_name, context)
 
 
 def createUser(request):
