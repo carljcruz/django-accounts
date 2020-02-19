@@ -4,15 +4,25 @@
 {% block content %}
 <h1>Hello, {{ request.user.username }}</h1>
 {% for order in orders %}
+<table>
+	<tr>
+		<th>Product ID</th>
+		<th>Product Name</th>
+		<th>Customer Name</th>
+		<th>Order Number</th>
+	</tr>
+	<tr>
+		<td>{{ order.product_id }}</td>
+		<td>{{ order.product_name }}</td>
+		<td>{{ order.customer_name }}</td>
+		<td>{{ order.order_number }}</td>
+	</tr>
+</table>
 
-<ul><li>
-		
-		{{ order.order_number }}
 
-	
-	</li></ul>
-	<a href="{% url 'update' order.pk %}" class="btn btn-info">Update</a>
-	<a href="{% url 'delete' order.pk %}" class="btn btn-danger">Delete</a>
+
+<a href="{% url 'update' order.pk %}" class="btn btn-info">Update</a>
+<a href="{% url 'delete' order.pk %}" class="btn btn-danger">Delete</a>
 {% endfor %}
 <br>
 
